@@ -12,12 +12,25 @@ export class FormContainerComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  otpSendbyEmail(email : string)
+  async otpSendbyEmail(email : string)
   {
+    var boo = {"email" : email}
+
+    const response = await fetch('localhost:9090', {
+      method: 'POST',
+      body: JSON.stringify(boo),
+      headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'} });
+    
+    if (!response.ok) { 
+      alert(email + " email send");
+    }
+    if (response.body !== null) {
+      alert(response.body);
+    }
     alert(email);
   }
-  otpSendByNumber(phone  : string)
+validateEmail(String  : string)
   {
-    alert(phone);
+    alert(String);
   }
 }
