@@ -3,6 +3,8 @@ package com.example.otpweb.services;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,15 +64,26 @@ public class AllservicesImpl implements Allservices {
 	public boolean OtpValidate(EmailOtp eo) {
 		
 		Email emailData = getByEmail(eo.getEmail());
-		if(emailData == null) return false;
+		if(emailData == null) 
+			{
+				System.out.print("SDFdsf");
+				return false;
+			}
 		else 
 		{
-			LocalDateTime start = emailData.getGenerateTime();
-			LocalDateTime end = emailData.getGenerateTime();
-			
-			
-			
-			return true;
+			if(emailData.getOtp().equals(eo.getOtp()))
+			{
+				LocalDateTime start = emailData.getGenerateTime();
+				LocalDateTime end = emailData.getExpiretime();
+				LocalDateTime curr = LocalDateTime.now();
+				System.out.println(ChronoUnit.MINUTES.between(curr , end));
+				if(ChronoUnit.MINUTES.between(curr , start) > 0 && ChronoUnit.MINUTES.between(curr , start) < 0)
+					{
+						return true;
+					}
+				return false;
+			}
+			return false;
 		}
 	}
 	

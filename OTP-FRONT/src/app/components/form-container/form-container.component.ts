@@ -29,16 +29,21 @@ export class FormContainerComponent implements OnInit {
         if (response.ok) alert(email + " email send");
         else console.log("lol ho gaya");
   }
-validateEmail(String  : string)
+
+  async validateEmail(email  : string  , otp : string)
   {
-    var boo = JSON.stringify({"email" : email});
-    const response = await fetch('http://localhost:9099/email', {
+    var boo = JSON.stringify({"email" : email  , "otp" : otp });
+    const response = await fetch('http://localhost:9099/otp-validate', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body :  boo
     });
-        if (response.ok) alert(email + " email send");
+        if (response.ok)
+        {
+          console.log(response);
+          alert(email + " email verified");
+        }      
         else console.log("lol ho gaya");
-    alert(String);
+
   }
 }

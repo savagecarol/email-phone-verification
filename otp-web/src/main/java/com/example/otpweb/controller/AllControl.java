@@ -58,7 +58,7 @@ public class AllControl
 	
 	@CrossOrigin
 	@PostMapping("/otp-validate")
-	public boolean addEmail(@RequestBody EmailOtp eo) 
+	public boolean otpValidate(@RequestBody EmailOtp eo) 
 	{
 		return AllServices.OtpValidate(eo);
 	}
