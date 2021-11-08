@@ -79,7 +79,9 @@ public class AllservicesImpl implements Allservices {
 				LocalDateTime start = emailData.getGenerateTime();
 				LocalDateTime end = emailData.getExpiretime();
 				LocalDateTime curr = LocalDateTime.now();
-				if(ChronoUnit.MINUTES.between(curr , start) < 0 && ChronoUnit.MINUTES.between(curr , end) > 0)
+				System.out.println(ChronoUnit.MINUTES.between(curr , start));
+				System.out.println(ChronoUnit.MINUTES.between(curr , end));
+				if(ChronoUnit.MINUTES.between(curr , start) <= 0 && ChronoUnit.MINUTES.between(curr , end) > 0)
 					{
 							return new ResponseEntity<>(HttpStatus.OK);
 					}
