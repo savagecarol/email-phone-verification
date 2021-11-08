@@ -2,13 +2,13 @@
 <div class="container m2 ">
     <div class="alert alert-danger" role="alert">
 <label for="email" class="form-label">Email address</label>
-    <input type="email" class="form-control"  #email>
+    <input type="email" class="form-control"  [disabled]='emailField' #email>
     <br>
-    <button type="button" class="btn btn-danger" (click) = "otpSendbyEmail(email.value)">validate otp</button>
+    <button type="button" class="btn btn-danger" (click) = "otpSendbyEmail(email.value )">send otp</button>
     <br>
     <br>
 <label for="email" class="form-label">Enter Otp</label>
-    <input type="tel" class="form-control"  #emailOtp>
+    <input type="tel" class="form-control" [disabled]='otpField' #emailOtp>
     <br>
 <button type="button" class="btn btn-danger" (click) = "validateEmail( email.value , emailOtp.value)">validae</button>
     </div>
