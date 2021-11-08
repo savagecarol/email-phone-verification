@@ -15,11 +15,6 @@ export class FormContainerComponent implements OnInit {
   async otpSendbyEmail(email : string)
   {
 
-    
-    // fetch('http://localhost:9099/email')
-    // .then(response => response.json())
-    // .then(data => console.log(data));
-
     var boo = JSON.stringify({"email" : email});
     const response = await fetch('https://email-verification-spring.herokuapp.com/email', {
       method: 'POST',
@@ -40,9 +35,9 @@ export class FormContainerComponent implements OnInit {
     });
         if (response.ok)
         {
-          console.log(response);
+          console.log(response.json());
           alert(email + " email verified");
         }      
-        else alert("oops! otp expired");
+        else alert("lol");
   }
 }
