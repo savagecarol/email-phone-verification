@@ -4,6 +4,8 @@ package com.example.otpweb.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,7 +50,7 @@ public class AllControl
 	
 	@CrossOrigin
 	@PostMapping("/email")
-	public Email addEmail(@RequestBody Email email) 
+	public ResponseEntity<HttpStatus> addEmail(@RequestBody Email email) 
 	{
 		System.out.print(false);
 		email.setGenerateTime();
@@ -60,7 +62,7 @@ public class AllControl
 	
 	@CrossOrigin
 	@PostMapping("/otp-validate")
-	public boolean otpValidate(@RequestBody EmailOtp eo) 
+	public  ResponseEntity<HttpStatus> otpValidate(@RequestBody EmailOtp eo) 
 	{
 		return AllServices.OtpValidate(eo);
 	}

@@ -8,6 +8,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.example.otpweb.Dao.EmailDao;
@@ -42,11 +44,13 @@ public class AllservicesImpl implements Allservices {
 	}
 
 	@Override
-	public Email addEmail(Email email)
+	public ResponseEntity<HttpStatus> addEmail(Email email)
 	{
 			Email x =  emailDao.save(email);
 			sendEmail(email.getEmail() , email.getOtp());
-			return x;
+			if(x!=null)
+				return new ResponseEntity<>(HttpStatus.OK);
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);		
 	}
 	
 	
@@ -61,13 +65,12 @@ public class AllservicesImpl implements Allservices {
     }
 
 	@Override
-	public boolean OtpValidate(EmailOtp eo) {
+	public ResponseEntity<HttpStatus> OtpValidate(EmailOtp eo) {
 		
 		Email emailData = getByEmail(eo.getEmail());
 		if(emailData == null) 
 			{
-				System.out.print("SDFdsf");
-				return false;
+					return new ResponseEntity<>(HttpStatus.BAD_REQUEST);	
 			}
 		else 
 		{
@@ -76,14 +79,13 @@ public class AllservicesImpl implements Allservices {
 				LocalDateTime start = emailData.getGenerateTime();
 				LocalDateTime end = emailData.getExpiretime();
 				LocalDateTime curr = LocalDateTime.now();
-				System.out.println(ChronoUnit.MINUTES.between(curr , end));
-				if(ChronoUnit.MINUTES.between(curr , start) > 0 && ChronoUnit.MINUTES.between(curr , start) < 0)
+				if(ChronoUnit.MINUTES.between(curr , start) < 0 && ChronoUnit.MINUTES.between(curr , end) > 0)
 					{
-						return true;
+							return new ResponseEntity<>(HttpStatus.OK);
 					}
-				return false;
+				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 			}
-			return false;
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}
 	
