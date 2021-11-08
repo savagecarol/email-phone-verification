@@ -21,19 +21,19 @@ export class FormContainerComponent implements OnInit {
     // .then(data => console.log(data));
 
     var boo = JSON.stringify({"email" : email});
-    const response = await fetch('http://localhost:9099/email', {
+    const response = await fetch('https://email-verification-spring.herokuapp.com/email', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body :  boo
     });
         if (response.ok) alert(email + " email send");
-        else console.log("lol ho gaya");
+        else  alert("oops! email cannot be send");
   }
 
   async validateEmail(email  : string  , otp : string)
   {
     var boo = JSON.stringify({"email" : email  , "otp" : otp });
-    const response = await fetch('http://localhost:9099/otp-validate', {
+    const response = await fetch('https://email-verification-spring.herokuapp.com/otp-validate', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body :  boo
@@ -43,7 +43,6 @@ export class FormContainerComponent implements OnInit {
           console.log(response);
           alert(email + " email verified");
         }      
-        else console.log("lol ho gaya");
-
+        else alert("oops! otp expired");
   }
 }
