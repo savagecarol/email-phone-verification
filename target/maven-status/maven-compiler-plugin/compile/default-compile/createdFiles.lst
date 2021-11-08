@@ -1,0 +1,9 @@
+com\example\otpweb\controller\AllControl.class
+com\example\otpweb\Dao\EmailDao.class
+com\example\otpweb\Dao\NumberDao.class
+com\example\otpweb\services\AllservicesImpl.class
+com\example\otpweb\entity\PhoneNumber.class
+com\example\otpweb\Dao\EmailOtp.class
+com\example\otpweb\entity\Email.class
+com\example\otpweb\services\Allservices.class
+com\example\otpweb\OtpWebApplication.class
