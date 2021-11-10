@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import com.example.otpweb.Dao.EmailOtp;
 import com.example.otpweb.entity.Email;
 
+
 public interface Allservices {
 	
 	List<Email> getAll() ;
