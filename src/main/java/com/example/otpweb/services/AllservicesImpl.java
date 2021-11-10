@@ -81,7 +81,7 @@ public class AllservicesImpl implements Allservices {
 				LocalDateTime curr = LocalDateTime.now();
 				System.out.println(ChronoUnit.MINUTES.between(curr , start));
 				System.out.println(ChronoUnit.MINUTES.between(curr , end));
-				if(ChronoUnit.MINUTES.between(curr , start) >= -1 && ChronoUnit.MINUTES.between(curr , end) >= 0)
+				if(ChronoUnit.MINUTES.between(start , curr) >= 0 && ChronoUnit.MINUTES.between(curr , end) >= 0)
 					{
 							return new ResponseEntity<>(HttpStatus.OK);
 					}
