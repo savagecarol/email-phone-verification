@@ -59,7 +59,7 @@ public class AllservicesImpl implements Allservices {
 	{
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setTo(email);
-        msg.setSubject("Testing from Spring Boot");
+        msg.setSubject("your OTP for KODEKART");
         msg.setText("our otp    " + otp + "   expire in 10 minutes ");
         javaMailSender.send(msg);
     }
