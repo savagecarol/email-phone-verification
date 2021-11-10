@@ -28,6 +28,7 @@ export class FormContainerComponent implements OnInit {
   {
     if(this.validate(email) == true)
     {
+    this.emailField = true;
     var boo = JSON.stringify({"email" : email});
     const response = await fetch('https://email-verification-spring.herokuapp.com/email', {
       method: 'POST',
@@ -40,26 +41,30 @@ export class FormContainerComponent implements OnInit {
             this.emailField = true;
             this.otpField= false;
         }
-        else this.toastr.success(email , 'network error occur');
+        else
+        {
+           this.toastr.success(email , 'network error occur');
+           this.emailField = false;
+        }
     }
     else
-    this.toastr.error(email, 'email is wrong please correct email');
-  }
+    {
+      this.toastr.error(email, 'email is wrong please correct email');
+      this.emailField = false;
+    }
+}
 
   async validateEmail(email  : string  , otp : string)
   {
  
-    if(this.x==3)
-    {
-      location.reload();
-    }
     var boo = JSON.stringify({"email" : email  , "otp" : otp });
     const response = await fetch('https://email-verification-spring.herokuapp.com/otp-validate', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body :  boo
     });
-        if(response.ok)
+      
+      if(response.ok)
         {
           this.toastr.success(email , 'email verified');  
           this.emailField = false;
@@ -70,7 +75,11 @@ export class FormContainerComponent implements OnInit {
           {
              this.x = this.x + 1;
              var y = 3 - this.x;
-             this.toastr.error(email, 'you have '+ y.toString() +' attempts');
+             this.toastr.error(email, 'you have '+ y.toString() + ' attempts');
+             if(this.x==3)
+             {
+               location.reload();
+             }
           }
    }
 }

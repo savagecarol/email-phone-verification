@@ -4,13 +4,18 @@
 <label for="email" class="form-label">Email address</label>
     <input type="email" class="form-control"  [disabled]='emailField' #email>
     <br>
-    <button type="button" class="btn btn-danger" (click) = "otpSendbyEmail(email.value )">send otp</button>
+    <button type="button" class="btn btn-danger" (click) = "otpSendbyEmail(email.value )"   [disabled]='emailField'>send otp</button>
     <br>
     <br>
 <label for="email" class="form-label">Enter Otp</label>
     <input type="tel" class="form-control" [disabled]='otpField' #emailOtp>
     <br>
-<button type="button" class="btn btn-danger" (click) = "validateEmail( email.value , emailOtp.value)">validae</button>
+<button type="button" class="btn btn-danger" (click) = "validateEmail( email.value , emailOtp.value)">validate</button>
+    </div>
+    <div class="alert alert-info" role="alert">
+        you will get three attempts to validate the otp
     </div>
 </div>
+
+
 
