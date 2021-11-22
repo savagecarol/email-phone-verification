@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.otpweb.Dao.EmailOtp;
+import com.example.otpweb.Exception.InvalidOTPException;
 import com.example.otpweb.entity.Email;
 import com.example.otpweb.services.Allservices;
 
@@ -62,7 +63,7 @@ public class AllControl
 	
 	@CrossOrigin
 	@PostMapping("/otp-validate")
-	public  ResponseEntity<HttpStatus> otpValidate(@RequestBody EmailOtp eo) 
+	public  ResponseEntity<HttpStatus> otpValidate(@RequestBody EmailOtp eo) throws InvalidOTPException
 	{
 		return AllServices.OtpValidate(eo);
 	}

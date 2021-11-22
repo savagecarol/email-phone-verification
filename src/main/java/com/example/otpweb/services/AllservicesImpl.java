@@ -1,24 +1,20 @@
 package com.example.otpweb.services;
 
-import java.sql.Date;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Period;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.example.otpweb.Dao.EmailDao;
 import com.example.otpweb.Dao.EmailOtp;
+import com.example.otpweb.Exception.InvalidOTPException;
 import com.example.otpweb.entity.Email;
-
-
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 
 
 
@@ -65,7 +61,7 @@ public class AllservicesImpl implements Allservices {
     }
 
 	@Override
-	public ResponseEntity<HttpStatus> OtpValidate(EmailOtp eo) {
+	public ResponseEntity<HttpStatus> OtpValidate(EmailOtp eo) throws InvalidOTPException {
 		
 		Email emailData = getByEmail(eo.getEmail());
 		if(emailData == null) 
@@ -87,7 +83,7 @@ public class AllservicesImpl implements Allservices {
 					}
 				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 			}
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			throw new InvalidOTPException("invalid otp exception");
 		}
 	}
 	

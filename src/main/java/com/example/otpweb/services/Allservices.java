@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.example.otpweb.Dao.EmailOtp;
+import com.example.otpweb.Exception.InvalidOTPException;
 import com.example.otpweb.entity.Email;
 
 
@@ -17,6 +18,6 @@ public interface Allservices {
 	
 	ResponseEntity<HttpStatus> addEmail(Email email) ;
 
-	ResponseEntity<HttpStatus> OtpValidate(EmailOtp eo);
+	ResponseEntity<HttpStatus> OtpValidate(EmailOtp eo) throws InvalidOTPException;
 	
 }
